@@ -21,9 +21,9 @@ CREATE TABLE Postagens (
 );
 
 CREATE TABLE Comentarios(
-	id_comentario INT AUTO_INCREMENT PRIMARY KEY,
-	id_postagem INT NOT NULL,
+    id_comentario INT AUTO_INCREMENT PRIMARY KEY,
+    id_postagem INT NOT NULL,
     id_usuario INT NOT NULL,
-	FOREIGN KEY (id_postagem) REFERENCES Postagens(id_postagem),
-	FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario)
+    FOREIGN KEY (id_postagem) REFERENCES Postagens(id_postagem),
+    FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario)
 );
