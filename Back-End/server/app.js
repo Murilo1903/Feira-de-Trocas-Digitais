@@ -25,6 +25,9 @@ app.post('/cadastrar', (req, res) => {
         if(err){
             return res.status(500).json({success: false, message: 'Erro ao cadastrar usuário.'})
         }
+        if (senha.length < 8) {
+            return res.status(400).send("A senha precisa ter no mínimo 8 caracteres.");
+        }
         res.json({success: true, message: 'Usuário cadastrado com sucesso!'})
     })
 })
@@ -36,7 +39,10 @@ app.put('/editar/:id', (req, res) => {
     connection.query(query, [nome, senha, email, id], (err) => {
         if(err){
             return res.status(500).json({success: false, message: 'Erro ao editar usuário.'})
-       }
+        }
+        if (senha.length < 8) {
+        return res.status(400).send("A senha precisa ter no mínimo 8 caracteres.");
+        }
        res.json({success: true, message: 'Usuário editado com sucesso'})
     })
 })
@@ -49,6 +55,23 @@ app.delete('/delete/:id', (req, res) => {
             return res.status(500).json({success: false, message: 'Erro ao deletar usuário.'})
         }
         res.json({success: true, message: 'Usuário deletado com sucesso!'})
+    })
+})
+
+app.get('/login', (req, res) => {
+    const {nome, senha} = req.body;
+ 
+    const query = 'SELECT * FROM usuarios WHERE nome = ? AND senha = ?';
+    connection.query(query, [nome, senha], (err, results) => {
+        if (err) {
+            return res.status(500).json({ success: false, message: 'Erro no servidor.'});
+        }
+ 
+        if (results.length > 0) {
+            res.json({ sucess: true, message: 'Login bem-sucedido'})
+        } else {
+            res.json({ sucess: false, message: 'Nome ou senha incorretos'})
+        }
     })
 })
 
