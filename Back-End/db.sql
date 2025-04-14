@@ -11,13 +11,13 @@ CREATE TABLE Usuarios (
 );
 
 CREATE TABLE Postagens (
-	id_postagem INT AUTO_INCREMENT PRIMARY KEY,
+    id_postagem INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
     titulo VARCHAR(40) NOT NULL,
     descricao VARCHAR(200) NOT NULL,
     curtidas INT NOT NULL,
     FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario),
-	criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE Comentarios(
