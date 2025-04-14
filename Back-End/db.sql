@@ -6,7 +6,7 @@ CREATE TABLE Usuarios (
     nome VARCHAR(35) NOT NULL,
     senha VARCHAR(15) NOT NULL,
     email VARCHAR(35) UNIQUE NOT NULL,
-    reputacao INT NOT NULL,
+    reputacao INT,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
