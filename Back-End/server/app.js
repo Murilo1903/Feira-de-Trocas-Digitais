@@ -21,12 +21,15 @@ app.get('/listar', (_req, res) => {
 app.post('/cadastrar', (req, res) => {
     const {nome, senha, email} = req.body
     const query = 'INSERT INTO usuarios(nome, senha, email) VALUES(?, ?, ?)'
+    if (senha.length < 8) {
+        return res.status(400).send("A senha precisa ter no mínimo 8 caracteres.");
+    }
+    if (senha.length > 15) {
+        return res.status(400).send("A senha não pode ter mais que 40 caracteres.");
+    }
     connection.query(query, [nome, senha, email], (err, _result) => {
         if(err){
             return res.status(500).json({success: false, message: 'Erro ao cadastrar usuário.'})
-        }
-        if (senha.length < 8) {
-            return res.status(400).send("A senha precisa ter no mínimo 8 caracteres.");
         }
         res.json({success: true, message: 'Usuário cadastrado com sucesso!'})
     })
@@ -36,12 +39,12 @@ app.put('/editar/:id', (req, res) => {
     const query = 'UPDATE usuarios SET nome = ?, senha = ?, email = ? WHERE id_usuario = ?';
     const {id} = req.params
     const {nome, senha, email} = req.body;
+    if (senha.length > 15) {
+        return res.status(401).send("A senha não pode ter mais que 40 caracteres.");
+    }
     connection.query(query, [nome, senha, email, id], (err) => {
         if(err){
             return res.status(500).json({success: false, message: 'Erro ao editar usuário.'})
-        }
-        if (senha.length < 8) {
-        return res.status(400).send("A senha precisa ter no mínimo 8 caracteres.");
         }
        res.json({success: true, message: 'Usuário editado com sucesso'})
     })
@@ -74,5 +77,29 @@ app.get('/login', (req, res) => {
         }
     })
 })
+
+app.get('/listar_postagens', (_req, res) => {
+    const query = 'SELECT * from Postagens'
+    connection.query(query, (err, result) => {
+        if(err){
+             return res.status(500).json({success: false, message: 'Erro ao listar postagens.'})
+        }
+        res.json({success: true, message: 'Postagens listadas com sucesso', id: result.insertId, data: result})
+    })
+})
+
+app.post('/postar/:id', (req, res) => {
+    const id_usuario = req.params.id
+    const {titulo, descricao} = req.body
+    const query = 'INSERT INTO Postagens(id_usuario, titulo, descricao) VALUES(?, ?)'
+    connection.query(query, [id_usuario, titulo, descricao], (err, _result) => {
+        if(err){
+            return res.status(500).json({success: false, message: 'Erro ao publicar postagem'})
+        }
+        res.json({success: true, message: 'Postagem publicada com sucesso!'})
+    })
+})
+
+
 
 app.listen(port, () => console.log(`Servidor rodando na porta ${port}`));

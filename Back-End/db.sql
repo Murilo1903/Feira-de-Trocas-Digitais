@@ -15,7 +15,7 @@ CREATE TABLE Postagens (
     id_usuario INT NOT NULL,
     titulo VARCHAR(40) NOT NULL,
     descricao VARCHAR(200) NOT NULL,
-    curtidas INT NOT NULL,
+    curtidas INT,
     FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario),
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
