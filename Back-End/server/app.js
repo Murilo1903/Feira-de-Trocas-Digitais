@@ -101,6 +101,27 @@ app.post('/postar/:id_usuario', (req, res) => {
     })
 })
 
+app.put('/editar_postagem/:id', (req, res) => {
+    const query = 'UPDATE postagens SET titulo = ?, descricao = ? WHERE id_postagem = ?';
+    const {id} = req.params
+    const {titulo, descricao} = req.body;
+    connection.query(query, [titulo, descricao, id], (err) => {
+        if(err){
+            return res.status(500).json({success: false, message: 'Erro ao editar postagem.'})
+        }
+       res.json({success: true, message: 'Postagem editada com sucesso'})
+    })
+})
 
+app.delete('/delete_postagem/:id', (req, res) => {
+    const {id} = req.params
+    const query = 'DELETE FROM postagens WHERE id_postagem = ?'
+    connection.query(query, [id], (err) => {
+        if(err){
+            return res.status(500).json({success: false, message: 'Erro ao deletar postagem.'})
+        }
+        res.json({success: true, message: 'Postagem deletada com sucesso!'})
+    })
+})
 
 app.listen(port, () => console.log(`Servidor rodando na porta ${port}`));
