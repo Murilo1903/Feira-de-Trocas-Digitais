@@ -88,10 +88,11 @@ app.get('/listar_postagens', (_req, res) => {
     })
 })
 
-app.post('/postar', (req, res) => {
-    const {titulo, descricao, id_usuario} = req.body
-    const query = 'INSERT INTO Postagens(titulo, descricao, id_usuario) VALUES(?, ?, ?)'
-    connection.query(query, [titulo, descricao, id_usuario], (err, _result) => {
+app.post('/postar/:id_usuario', (req, res) => {
+    const {titulo, descricao} = req.body
+    const {id_usuario} = req.params
+    const query = 'INSERT INTO Postagens( id_usuario, titulo, descricao) VALUES(?, ?, ?)'
+    connection.query(query, [id_usuario, titulo, descricao], (err, _result) => {
         if(err){
             console.log(err);
             return res.status(500).json({success: false, message: 'Erro ao publicar postagem'})
