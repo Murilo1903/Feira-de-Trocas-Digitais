@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: white;
+  }
+  
+  header {
+    background-color: #0c1026;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+  }
+  
+  header h1 {
+    font-weight: 600;
+    font-size: 2rem;
+  }
+  
+  .login-btn {
+    background-color: #163a62;
+    color: black;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-weight: 500;
+    color: white;
+  }
+  
+  main {
+    display: flex;
+  }
+  
+  .filtro {
+    background-color: #163a62;
+    color: black;
+    padding: 2rem;
+    width: 280px;
+    height: 880px;
+    color: white;
+  }
+  
+  .filtro h2 {
+    margin-bottom: 1rem;
+  }
+  
+  .filtro ul {
+    list-style: none;
+  }
+  
+  .filtro li {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+  
+  .conteudo {
+    max-width: 800px;
+    width: 100%;
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+  }
+  
+  .topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    position: relative;
+    width: 100%;
+  }
+  
+  .topo h2 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .add-btn {
+    background-color: #163a62;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-weight: 500;
+    color: white;
+  }
+  
+  .duvidas {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+  }
+  
+  .box {
+    background-color: #dcdcdc;
+    height: 200px;
+    border-radius: 5px;
+    width: 500px;
+  }
+  
+  a {
+    text-decoration: none;  /* remove o sublinhado */
+    color: inherit;         /* herda a cor do elemento pai */
+  }
+  
+  a:visited {
+    color: inherit;         /* remove a cor roxa de links visitados */
+  }
+  
+  a:focus,
+  a:hover,
+  a:active {
+    outline: none;          /* remove a borda azul/roxa ao clicar ou focar */
+    color: inherit;         /* mantém a cor herdada ao passar o mouse */
+  }
+  
