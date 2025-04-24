@@ -134,11 +134,12 @@ app.get('/listar_comentarios', (_req, res) => {
     })
 })
 
-app.post('/comentar/:id_postagem', (req, res) => {
+app.post('/comentar/:id_postagem/:id_usuario', (req, res) => {
     const {conteudo} = req.body
     const {id_postagem} = req.params
-    const query = 'INSERT INTO Comentarios ( id_postagem, conteudo) VALUES(?, ?)'
-    connection.query(query, [id_postagem, conteudo], (err, _result) => {
+    const {id_usuario} = req.params
+    const query = 'INSERT INTO Comentarios (id_usuario, id_postagem, conteudo) VALUES(?, ?, ?)'
+    connection.query(query, [id_usuario, id_postagem, conteudo], (err, _result) => {
         if(err){
             console.log(err);
             return res.status(500).json({success: false, message: 'Erro ao publicar comentário'})
