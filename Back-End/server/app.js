@@ -171,5 +171,4 @@ app.delete('/delete_comentario/:id', (req, res) => {
     })
 })
 
-
 app.listen(port, () => console.log(`Servidor rodando na porta ${port}`));
